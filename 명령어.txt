@@ -1,0 +1,175 @@
+=================================================================
+ 터미널에 그대로 복사해서 붙여 넣으세요.
+ VS Code 에서 터미널 여는 법: 메뉴 Terminal > New Terminal
+
+ 순서대로 합니다. 건너뛰지 않습니다.
+ 지난 시간에 했더라도 처음부터 다시 합니다.
+ 각 단계에 "이렇게 보이면 성공" 이 있습니다.
+ 그 줄이 안 보이면 다음 단계로 가지 않습니다.
+=================================================================
+
+
+[ 0. 폴더를 제자리에 둡니다 ]
+
+받은 압축 파일을 바탕화면에 풀어주세요.
+바탕화면에 lab 라는 폴더가 생깁니다.
+
+VS Code 를 열고 메뉴 File > Open Folder 로 그 lab 를 엽니다.
+폴더 안의 파일이 아니라 폴더 자체를 엽니다.
+
+  이렇게 보이면 성공
+    왼쪽 목록에 app.py 와 settings.py 가 보입니다.
+
+  안 되면
+    파일 하나만 열렸다면 폴더를 안 연 것입니다. File > Open Folder 를 다시 합니다.
+
+
+-----------------------------------------------------------------
+[ 1. 파이썬이 어느 것인지 봅니다 ]
+
+[ Windows ]   python --version
+[ Mac ]       python3 --version
+
+  이렇게 보이면 성공
+    Python 3.10 / 3.11 / 3.12 중 하나가 나옵니다. (3.11 이 가장 안전합니다.)
+
+  안 되면
+    3.13 또는 3.14 로 시작하면 -> 이 버전은 오늘 쓰는 패키지가 아직 안 맞습니다.
+      3.11 이나 3.12 를 따로 깔고 그 파이썬으로 .venv 를 만드세요. 강사에게 알려주세요.
+    3.9 로 시작하면 -> 그대로 진행하되 3번을 절대 건너뛰지 마세요.
+      (건너뛰면 설치가 몇 분 돌다가 빨간 글씨로 죽습니다.)
+    command not found -> 파이썬이 없습니다. 강사에게 알려주세요.
+
+
+-----------------------------------------------------------------
+[ 2. 자리를 맞춥니다 ]
+
+터미널 맨 앞에 lab 가 보여야 합니다.
+안 보이면 아래 한 줄을 붙여 넣습니다.
+
+  cd lab
+
+  이렇게 보이면 성공
+    터미널 줄 맨 앞에 lab 라는 글자가 있습니다.
+
+  안 되면
+    no such file or directory -> 다른 자리입니다. VS Code 를 닫고 0번부터 다시 합니다.
+
+  .venv 는 폴더마다 따로 만들어집니다.
+  다른 폴더에서 만든 것은 여기서 쓰이지 않습니다.
+
+
+-----------------------------------------------------------------
+[ 3. 상자를 만들고 pip 를 새것으로 바꿉니다 ]
+
+[ Windows ]
+  python -m venv .venv
+  .\.venv\Scripts\python.exe -m pip install --upgrade pip
+
+[ Mac ]
+  python3 -m venv .venv
+  ./.venv/bin/python -m pip install --upgrade pip
+
+  이렇게 보이면 성공
+    Successfully installed pip-26.2.1
+    (숫자는 달라도 됩니다. Successfully 라는 글자가 핵심입니다.)
+
+  안 되면
+    아무 반응이 없다 -> 1번의 파이썬 버전을 다시 봅니다.
+
+
+-----------------------------------------------------------------
+[ 4. 필요한 것을 설치합니다 ]
+
+[ Windows ]
+  .\.venv\Scripts\python.exe -m pip install "gradio==5.14.0" "huggingface_hub==0.25.2" "google-generativeai==0.8.6" "python-dotenv==1.0.1"
+
+[ Mac ]
+  ./.venv/bin/python -m pip install "gradio==5.14.0" "huggingface_hub==0.25.2" "google-generativeai==0.8.6" "python-dotenv==1.0.1"
+
+  2 - 3 분 걸립니다. 글자가 계속 올라가는 것은 정상입니다.
+
+  이렇게 보이면 성공
+    Successfully installed ... gradio-5.14.0 ... google-generativeai-0.8.6 ...
+
+  안 되면
+    Failed building wheel for cryptography -> 3번을 건너뛰었습니다. 3번을 하고 4번을 다시 합니다.
+
+
+-----------------------------------------------------------------
+[ 5. 설치가 됐는지 확인합니다 ]
+
+[ Windows ]
+  .\.venv\Scripts\python.exe -c "import gradio, google.generativeai, dotenv; print('설치 OK  gradio', gradio.__version__)"
+
+[ Mac ]
+  ./.venv/bin/python -c "import gradio, google.generativeai, dotenv; print('설치 OK  gradio', gradio.__version__)"
+
+  이렇게 보이면 성공
+    설치 OK  gradio 5.14.0
+
+  같이 뜨는 이 줄은 정상입니다. 에러가 아닙니다.
+    https://github.com/google-gemini/deprecated-generative-ai-python/...
+
+  안 되면
+    ModuleNotFoundError -> 4번이 끝까지 안 갔습니다. 4번을 다시 합니다.
+
+
+-----------------------------------------------------------------
+[ 6. 열쇠를 넣습니다 ]
+
+폴더 안에 .env 파일이 이미 있습니다. 새로 만들거나 이름을 바꾸지 않습니다.
+그 파일을 열고 자기 키를 넣습니다.
+
+  GEMINI_API_KEY=여기에_내_API키
+
+= 앞뒤에 빈칸을 넣지 않습니다. 따옴표도 넣지 않습니다.
+키는 각자 것을 씁니다.
+
+
+-----------------------------------------------------------------
+[ 7. 열쇠가 들어갔는지, 모델이 대답하는지 확인합니다 ]
+
+[ Windows ]
+  .\.venv\Scripts\python.exe check.py
+
+[ Mac ]
+  ./.venv/bin/python check.py
+
+  이렇게 보이면 성공
+    키 OK  길이 39
+    모델 OK  gemini-3.5-flash-lite  응답: 청색
+
+  안 되면
+    키 없음 -> .env 라는 이름이 맞는지 봅니다. .env.example 그대로면 안 됩니다.
+    API key not valid -> 키를 다시 복사해 넣습니다. 앞뒤 빈칸을 지웁니다.
+    429 -> 1분 안에 15번을 넘겼습니다. 한도는 모델마다 따로 있습니다.
+           화면에 적힌 초만큼 기다렸다 다시 하면 됩니다.
+           VS Code 의 Continue 도 같은 모델을 쓰면 서로 잡아먹습니다.
+           자주 나면 Continue 의 모델을 다른 것으로 바꾸세요.
+
+
+-----------------------------------------------------------------
+[ 8. 봇을 켭니다 ]
+
+[ Windows ]
+  .\.venv\Scripts\python.exe app.py
+
+[ Mac ]
+  ./.venv/bin/python app.py
+
+  이렇게 보이면 성공
+    Running on local URL:  http://127.0.0.1:7860
+    그 주소를 브라우저에서 엽니다.
+
+  끄는 것은 Ctrl + C 입니다.
+  settings.py 를 고쳤으면 껐다가 다시 켜야 화면이 바뀝니다.
+
+
+=================================================================
+ 0 - 7 번은 처음 한 번만 합니다. 8 번이 봇을 켭니다.
+
+ 처음 값으로 되돌리려면
+   [ Windows ]  .\.venv\Scripts\python.exe reset.py
+   [ Mac ]      ./.venv/bin/python reset.py
+=================================================================
