@@ -279,6 +279,12 @@
       outline-offset: 2px;
     }
 
+    .field[hidden],
+    .chip[hidden],
+    .summary-row[hidden] {
+      display: none;
+    }
+
     .place-list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -326,7 +332,7 @@
 
     .taxi-options {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
 
@@ -550,6 +556,642 @@
         animation: none;
       }
     }
+
+    /* Cohere-inspired visual layer */
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --text: #17171c;
+      --muted: #93939f;
+      --body-muted: #616161;
+      --line: #d9d9dd;
+      --line-light: #e5e7eb;
+      --primary: #17171c;
+      --primary-dark: #000000;
+      --primary-soft: #eeece7;
+      --deep-green: #003c33;
+      --dark-navy: #071829;
+      --soft-stone: #eeece7;
+      --pale-green: #edfce9;
+      --pale-blue: #f1f5ff;
+      --coral: #ff7759;
+      --coral-soft: #ffad9b;
+      --focus-blue: #4c6ee6;
+      --success: #003c33;
+      --success-soft: #edfce9;
+      --danger: #b30000;
+      --radius: 20px;
+      --shadow: none;
+    }
+
+    body {
+      color: var(--text);
+      background: #ffffff;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      font-size: 16px;
+      letter-spacing: -0.012em;
+    }
+
+    ::selection {
+      color: var(--deep-green);
+      background: var(--pale-green);
+    }
+
+    .page-shell {
+      width: min(100% - 48px, 960px);
+      padding: 88px 0 96px;
+    }
+
+    .page-header {
+      margin-bottom: 48px;
+    }
+
+    .eyebrow {
+      margin-bottom: 16px;
+      color: var(--deep-green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2.65rem, 7vw, 4.8rem);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.065em;
+    }
+
+    .intro {
+      max-width: 540px;
+      margin-top: 22px;
+      color: var(--body-muted);
+      font-size: 1rem;
+      line-height: 1.72;
+    }
+
+    .progress {
+      gap: 24px;
+      margin: 0 0 24px;
+    }
+
+    .progress li {
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .progress li.active {
+      border-color: var(--text);
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .progress li:nth-child(1).active {
+      border-color: var(--deep-green);
+      color: var(--deep-green);
+    }
+
+    .progress li:nth-child(2).active {
+      border-color: var(--dark-navy);
+      color: var(--dark-navy);
+    }
+
+    .progress li.done {
+      border-color: #9cb9a9;
+      color: var(--deep-green);
+      font-weight: 500;
+    }
+
+    .progress li.done::after {
+      margin-left: 5px;
+      color: var(--deep-green);
+      content: "✓";
+    }
+
+    .card {
+      padding: clamp(28px, 5vw, 52px);
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: none;
+    }
+
+    .card.active {
+      animation-duration: 160ms;
+    }
+
+    .card-heading {
+      margin-bottom: 38px;
+    }
+
+    .step-label {
+      margin-bottom: 9px;
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    #place-step .step-label {
+      color: var(--deep-green);
+    }
+
+    #taxi-step .step-label {
+      color: var(--dark-navy);
+    }
+
+    #summary-step .step-label {
+      color: var(--coral);
+    }
+
+    #complete-step .step-label {
+      color: var(--deep-green);
+    }
+
+    h2 {
+      font-size: clamp(1.65rem, 4vw, 2.2rem);
+      font-weight: 520;
+      line-height: 1.18;
+      letter-spacing: -0.045em;
+    }
+
+    .card-description {
+      max-width: 560px;
+      margin-top: 10px;
+      color: var(--body-muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .field-grid {
+      gap: 26px 20px;
+    }
+
+    .field > label,
+    legend {
+      margin-bottom: 10px;
+      color: #34343a;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+    }
+
+    .required::after {
+      color: var(--coral);
+      font-size: 0.72em;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"],
+    select,
+    textarea {
+      min-height: 54px;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--text);
+      background: #ffffff;
+      box-shadow: none;
+      transition: border-color 120ms ease, background-color 120ms ease;
+    }
+
+    input:hover,
+    select:hover,
+    textarea:hover {
+      border-color: #babac1;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--deep-green);
+      box-shadow: none;
+    }
+
+    #taxi-step input:focus,
+    #taxi-step select:focus,
+    #taxi-step textarea:focus {
+      border-color: var(--focus-blue);
+    }
+
+    input[readonly] {
+      color: var(--dark-navy);
+      border-color: #dfe4ef;
+      background: var(--pale-blue);
+    }
+
+    .helper {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.77rem;
+      line-height: 1.5;
+    }
+
+    .choice-row {
+      gap: 10px;
+    }
+
+    .chip span {
+      padding: 9px 15px;
+      border-color: var(--line);
+      color: var(--body-muted);
+      background: #ffffff;
+      font-size: 0.86rem;
+      transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease;
+    }
+
+    .chip span:hover {
+      border-color: #b9c8c1;
+      background: #fbfdfb;
+    }
+
+    .chip input:checked + span {
+      border-color: var(--deep-green);
+      color: var(--deep-green);
+      background: var(--pale-green);
+      font-weight: 600;
+    }
+
+    .chip input:focus-visible + span,
+    .taxi-choice input:focus-visible + span,
+    .place-option input:focus-visible + .place-content {
+      outline: 2px solid var(--focus-blue);
+      outline-offset: 2px;
+    }
+
+    .place-list {
+      gap: 14px;
+    }
+
+    .place-content {
+      min-height: 118px;
+      padding: 20px;
+      border-color: var(--line-light);
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: none;
+      transition: border-color 120ms ease, background-color 120ms ease;
+    }
+
+    .place-content:hover {
+      border-color: #c9d3cd;
+      background: #fbfdfb;
+    }
+
+    .place-option input:checked + .place-content {
+      border-color: var(--deep-green);
+      background: var(--pale-green);
+      box-shadow: none;
+    }
+
+    .place-name {
+      margin-bottom: 7px;
+      color: var(--text);
+      font-size: 0.98rem;
+      font-weight: 650;
+    }
+
+    .place-meta {
+      color: var(--body-muted);
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    .empty-state {
+      padding: 28px;
+      border-color: var(--line);
+      border-radius: 16px;
+      color: var(--body-muted);
+      background: var(--soft-stone);
+    }
+
+    .taxi-options {
+      gap: 14px;
+    }
+
+    .taxi-choice span {
+      min-height: 84px;
+      padding: 17px 18px;
+      border-color: var(--line-light);
+      border-radius: 16px;
+      color: var(--dark-navy);
+      background: #ffffff;
+      transition: border-color 120ms ease, background-color 120ms ease;
+    }
+
+    .taxi-choice span:hover {
+      border-color: #ccd4e4;
+      background: #fafbff;
+    }
+
+    .taxi-choice strong {
+      font-size: 0.94rem;
+      font-weight: 650;
+    }
+
+    .taxi-choice small {
+      margin-top: 4px;
+      color: var(--body-muted);
+      font-size: 0.76rem;
+    }
+
+    .taxi-choice input:checked + span {
+      border-color: var(--dark-navy);
+      color: var(--dark-navy);
+      background: var(--pale-blue);
+      box-shadow: none;
+    }
+
+    .actions {
+      gap: 16px;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-color: var(--line-light);
+    }
+
+    .button {
+      min-height: 48px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: color 120ms ease, background-color 120ms ease, border-color 120ms ease;
+    }
+
+    .button:active {
+      transform: none;
+    }
+
+    .button.primary {
+      color: #ffffff;
+      background: var(--primary);
+    }
+
+    .button.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button.secondary {
+      border-color: var(--line);
+      color: var(--body-muted);
+      background: #ffffff;
+    }
+
+    .button.secondary:hover {
+      border-color: #bdbdc4;
+      color: var(--text);
+      background: var(--soft-stone);
+    }
+
+    #reset-all {
+      border-color: var(--coral-soft);
+      color: #c54e36;
+      background: #ffffff;
+    }
+
+    #reset-all:hover {
+      border-color: var(--coral);
+      color: #9e351f;
+      background: #fff7f5;
+    }
+
+    .error-message {
+      margin-top: 18px;
+      padding: 12px 14px;
+      border: 1px solid #ffd5cc;
+      border-radius: 12px;
+      color: var(--danger);
+      background: #fff7f5;
+      font-size: 0.82rem;
+      font-weight: 550;
+    }
+
+    .complete-banner {
+      margin-bottom: 24px;
+      padding: 17px 20px;
+      border: 1px solid #cde7c7;
+      border-radius: 14px;
+      color: var(--deep-green);
+      background: var(--pale-green);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .summary-grid {
+      gap: 18px;
+    }
+
+    .summary-section {
+      padding: 26px;
+      border-color: var(--line-light);
+      border-radius: 16px;
+      background: #ffffff;
+    }
+
+    .summary-title {
+      margin-bottom: 22px;
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    .summary-title::before {
+      width: 26px;
+      height: 26px;
+      color: var(--deep-green);
+      background: var(--pale-green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    #taxi-summary-title::before {
+      color: var(--dark-navy);
+      background: var(--pale-blue);
+    }
+
+    .summary-list {
+      gap: 16px;
+    }
+
+    .summary-row {
+      grid-template-columns: 78px minmax(0, 1fr);
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #f0f0f2;
+    }
+
+    .summary-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .summary-row dt {
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.55;
+    }
+
+    .summary-row dd {
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 550;
+      line-height: 1.5;
+    }
+
+    .edit-button {
+      padding: 3px 0;
+      color: #d95338;
+      font-size: 0.77rem;
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-color: var(--coral-soft);
+      text-underline-offset: 4px;
+    }
+
+    .edit-button:hover {
+      color: #a93b25;
+      text-decoration-color: var(--coral);
+    }
+
+    .notice {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .selected-place-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin: -8px 0 32px;
+      padding: 18px 20px;
+      border: 1px solid #dfe4ef;
+      border-radius: 16px;
+      background: var(--pale-blue);
+    }
+
+    .selected-place-label {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .selected-place-name {
+      display: block;
+      color: var(--dark-navy);
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    .selected-place-meta {
+      display: block;
+      margin-top: 3px;
+      color: var(--body-muted);
+      font-size: 0.78rem;
+    }
+
+    .selected-place-card .edit-button {
+      flex: 0 0 auto;
+    }
+
+    .approval-actions {
+      align-items: center;
+    }
+
+    .approval-actions .button.primary {
+      margin-left: auto;
+    }
+
+    #complete-step .complete-banner {
+      margin-bottom: 28px;
+    }
+
+    #final-taxi-summary-title::before {
+      color: var(--dark-navy);
+      background: var(--pale-blue);
+    }
+
+    @media (max-width: 680px) {
+      .page-shell {
+        width: min(100% - 28px, 960px);
+        padding: 48px 0 56px;
+      }
+
+      .page-header {
+        margin-bottom: 36px;
+      }
+
+      h1 {
+        font-size: clamp(2.4rem, 13vw, 3.6rem);
+      }
+
+      .intro {
+        margin-top: 18px;
+      }
+
+      .progress {
+        gap: 10px;
+      }
+
+      .progress li {
+        padding-top: 10px;
+        font-size: 0.7rem;
+      }
+
+      .card {
+        padding: 28px 20px;
+        border-radius: 18px;
+      }
+
+      .card-heading {
+        margin-bottom: 30px;
+      }
+
+      .field-grid {
+        gap: 22px;
+      }
+
+      .place-content {
+        min-height: auto;
+        padding: 18px;
+      }
+
+      .taxi-choice span {
+        min-height: 72px;
+      }
+
+      .summary-section {
+        padding: 22px 18px;
+      }
+
+      .selected-place-card {
+        align-items: flex-start;
+        margin-bottom: 26px;
+        padding: 17px;
+      }
+
+      .actions {
+        gap: 10px;
+        margin-top: 32px;
+        padding-top: 22px;
+      }
+
+      .approval-actions .button.primary {
+        margin-left: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -584,6 +1226,8 @@
               <option value="cafe">카페</option>
               <option value="meeting">회의 공간</option>
               <option value="activity">체험·액티비티</option>
+              <option value="lodging">숙소</option>
+              <option value="tourism">관광</option>
             </select>
           </div>
 
@@ -594,6 +1238,18 @@
               <option value="hongdae">서울 홍대</option>
               <option value="seongsu">서울 성수</option>
               <option value="jamsil">서울 잠실</option>
+              <option value="jongno">서울 종로</option>
+            </select>
+          </div>
+
+          <div class="field full" id="cuisine-field">
+            <label for="cuisine-type">음식 종류</label>
+            <select id="cuisine-type">
+              <option value="">전체 음식</option>
+              <option value="chicken">치킨</option>
+              <option value="japanese">일식</option>
+              <option value="korean">한식</option>
+              <option value="western">양식</option>
             </select>
           </div>
 
@@ -619,6 +1275,10 @@
               <label class="chip">
                 <input type="checkbox" name="condition" value="반려동물 동반">
                 <span>반려동물 동반</span>
+              </label>
+              <label class="chip" id="gym-condition" hidden>
+                <input type="checkbox" name="condition" value="헬스장 있음">
+                <span>헬스장 있음</span>
               </label>
             </div>
           </fieldset>
@@ -647,6 +1307,15 @@
         </div>
       </div>
 
+      <div class="selected-place-card" aria-label="현재 선택한 장소">
+        <div>
+          <span class="selected-place-label">선택 장소</span>
+          <strong class="selected-place-name" id="step2-place-name"></strong>
+          <span class="selected-place-meta" id="step2-place-meta"></span>
+        </div>
+        <button class="edit-button" id="step2-place-edit" type="button">장소 수정</button>
+      </div>
+
       <form id="taxi-form" novalidate>
         <div class="field-grid">
           <div class="field">
@@ -669,7 +1338,11 @@
             <legend class="required">택시 종류</legend>
             <div class="taxi-options">
               <label class="taxi-choice">
-                <input type="radio" name="taxi-type" value="일반 택시" checked>
+                <input type="radio" name="taxi-type" value="상관없음" checked>
+                <span><strong>상관없음</strong><small>차량 종류 무관</small></span>
+              </label>
+              <label class="taxi-choice">
+                <input type="radio" name="taxi-type" value="일반 택시">
                 <span><strong>일반 택시</strong><small>최대 4명</small></span>
               </label>
               <label class="taxi-choice">
@@ -688,7 +1361,7 @@
 
         <div class="actions">
           <button class="button secondary" type="button" data-go-step="1">이전</button>
-          <button class="button primary" type="submit">접수 내용 확인</button>
+          <button class="button primary" id="taxi-submit-button" type="submit">접수 내용 확인</button>
         </div>
       </form>
     </section>
@@ -697,23 +1370,24 @@
       <div class="card-heading">
         <div>
           <p class="step-label">STEP 3</p>
-          <h2 id="summary-title">접수 내용을 확인해 주세요</h2>
-          <p class="card-description">각 수정 버튼을 누르면 입력했던 내용을 유지한 채 해당 단계로 돌아갑니다.</p>
+          <h2 id="summary-title">최종 내용을 확인해 주세요</h2>
+          <p class="card-description">아직 접수가 완료되지 않았습니다. 필요한 내용을 수정하거나 최종 승인해 주세요.</p>
         </div>
       </div>
 
-      <div class="complete-banner" role="status">장소와 택시 정보가 준비되었습니다.</div>
+      <div class="complete-banner" role="status">최종 승인 전입니다. 아래 장소와 택시 정보를 확인해 주세요.</div>
 
       <div class="summary-grid">
         <section class="summary-section" aria-labelledby="place-summary-title">
           <h3 class="summary-title" id="place-summary-title" data-number="1">
             장소 정보
-            <button class="edit-button" type="button" data-go-step="1">장소 수정</button>
+            <button class="edit-button" id="review-place-edit" type="button">장소 수정</button>
           </h3>
           <dl class="summary-list">
             <div class="summary-row"><dt>장소명</dt><dd id="summary-place-name"></dd></div>
             <div class="summary-row"><dt>유형</dt><dd id="summary-place-type"></dd></div>
             <div class="summary-row"><dt>지역</dt><dd id="summary-region"></dd></div>
+            <div class="summary-row" id="summary-cuisine-row"><dt>음식 종류</dt><dd id="summary-cuisine"></dd></div>
             <div class="summary-row"><dt>조건</dt><dd id="summary-conditions"></dd></div>
           </dl>
         </section>
@@ -721,7 +1395,7 @@
         <section class="summary-section" aria-labelledby="taxi-summary-title">
           <h3 class="summary-title" id="taxi-summary-title" data-number="2">
             택시 정보
-            <button class="edit-button" type="button" data-go-step="2">택시 수정</button>
+            <button class="edit-button" id="review-taxi-edit" type="button">택시 수정</button>
           </h3>
           <dl class="summary-list">
             <div class="summary-row"><dt>출발지</dt><dd id="summary-departure"></dd></div>
@@ -732,110 +1406,204 @@
         </section>
       </div>
 
-      <p class="notice">이 화면은 기능 확인용이며 실제 예약이나 택시 호출은 이루어지지 않습니다.</p>
+      <p class="notice">최종 승인 전까지 장소와 택시 정보를 자유롭게 수정할 수 있습니다.</p>
+      <div class="actions approval-actions">
+        <button class="button secondary" id="review-all-edit" type="button">장소부터 다시 수정</button>
+        <button class="button secondary" id="reset-all" type="button">처음부터 다시</button>
+        <button class="button primary" id="final-approve" type="button">최종 승인</button>
+      </div>
+    </section>
+
+    <section class="card" id="complete-step" aria-labelledby="complete-title" hidden>
+      <div class="card-heading">
+        <div>
+          <p class="step-label">APPROVED</p>
+          <h2 id="complete-title">접수가 완료되었습니다.</h2>
+          <p class="card-description">최종 승인된 장소와 택시 정보입니다.</p>
+        </div>
+      </div>
+
+      <div class="complete-banner" role="status">최종 승인이 완료되었습니다.</div>
+
+      <div class="summary-grid">
+        <section class="summary-section" aria-labelledby="final-place-summary-title">
+          <h3 class="summary-title" id="final-place-summary-title" data-number="1">장소 정보</h3>
+          <dl class="summary-list">
+            <div class="summary-row"><dt>장소명</dt><dd id="final-place-name"></dd></div>
+            <div class="summary-row"><dt>유형</dt><dd id="final-place-type"></dd></div>
+            <div class="summary-row"><dt>지역</dt><dd id="final-region"></dd></div>
+            <div class="summary-row" id="final-cuisine-row"><dt>음식 종류</dt><dd id="final-cuisine"></dd></div>
+            <div class="summary-row"><dt>조건</dt><dd id="final-conditions"></dd></div>
+          </dl>
+        </section>
+
+        <section class="summary-section" aria-labelledby="final-taxi-summary-title">
+          <h3 class="summary-title" id="final-taxi-summary-title" data-number="2">택시 정보</h3>
+          <dl class="summary-list">
+            <div class="summary-row"><dt>출발지</dt><dd id="final-departure"></dd></div>
+            <div class="summary-row"><dt>도착지</dt><dd id="final-destination"></dd></div>
+            <div class="summary-row"><dt>출발 시간</dt><dd id="final-time"></dd></div>
+            <div class="summary-row"><dt>택시 종류</dt><dd id="final-taxi-type"></dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <p class="notice">현재는 화면에서만 완료 처리되며 실제 데이터베이스에는 저장되지 않습니다.</p>
+      <div class="actions">
+        <button class="button secondary" id="reset-after-approval" type="button">처음부터 다시</button>
+      </div>
     </section>
   </main>
 
   <script>
+    const place = (name, meta, conditions = [], cuisine = "") => ({
+      name,
+      meta,
+      conditions,
+      cuisine
+    });
+
+    const lodgingPlaces = [
+      place("스테이 A", "편안한 휴식 공간 · 체크인 15:00", ["조용한 분위기", "주차 가능", "헬스장 있음"]),
+      place("스테이 B", "감성 숙소 · 반려동물 동반 가능", ["반려동물 동반"]),
+      place("시티호텔", "도심형 호텔 · 24시간 프런트", ["주차 가능", "늦은 시간", "헬스장 있음"])
+    ];
+
     const placeCatalog = {
       gangnam: {
         restaurant: [
-          ["담소 강남점", "강남역 도보 4분 · 한식 다이닝"],
-          ["키친 테이블 502", "신논현역 도보 5분 · 양식"],
-          ["미미정", "역삼역 도보 6분 · 퓨전 한식"]
+          place("강남 바삭치킨", "강남역 도보 3분 · 치킨", ["단체석", "늦은 시간"], "chicken"),
+          place("스시 하루", "신논현역 도보 4분 · 일식", ["조용한 분위기", "주차 가능"], "japanese"),
+          place("담소 강남점", "강남역 도보 4분 · 한식 다이닝", ["주차 가능", "단체석"], "korean"),
+          place("키친 테이블 502", "신논현역 도보 5분 · 양식", ["조용한 분위기", "반려동물 동반"], "western"),
+          place("미미정", "역삼역 도보 6분 · 퓨전 한식", ["단체석", "늦은 시간"], "korean")
         ],
         cafe: [
-          ["모먼트 커피 강남", "강남역 도보 3분 · 넓은 좌석"],
-          ["오후의 서재", "역삼역 도보 5분 · 조용한 북카페"],
-          ["테라스 17", "신논현역 도보 7분 · 루프탑"]
+          place("모먼트 커피 강남", "강남역 도보 3분 · 넓은 좌석", ["단체석", "늦은 시간"]),
+          place("오후의 서재", "역삼역 도보 5분 · 조용한 북카페", ["조용한 분위기"]),
+          place("테라스 17", "신논현역 도보 7분 · 루프탑", ["주차 가능", "반려동물 동반"])
         ],
         meeting: [
-          ["워크라운지 강남", "강남역 도보 2분 · 최대 10명"],
-          ["모임공간 잇다", "역삼역 도보 4분 · 최대 8명"],
-          ["스페이스 어반", "신논현역 도보 5분 · 최대 16명"]
+          place("워크라운지 강남", "강남역 도보 2분 · 최대 10명", ["조용한 분위기", "단체석"]),
+          place("모임공간 잇다", "역삼역 도보 4분 · 최대 8명", ["조용한 분위기", "주차 가능"]),
+          place("스페이스 어반", "신논현역 도보 5분 · 최대 16명", ["주차 가능", "단체석", "늦은 시간"])
         ],
         activity: [
-          ["컬러랩 강남", "퍼스널 컬러 체험 · 약 90분"],
-          ["세라믹 스튜디오 온", "도자기 공방 · 약 120분"],
-          ["룸이스케이프 G", "방탈출 · 2~6명"]
-        ]
+          place("컬러랩 강남", "퍼스널 컬러 체험 · 약 90분", ["조용한 분위기"]),
+          place("세라믹 스튜디오 온", "도자기 공방 · 약 120분", ["주차 가능", "반려동물 동반"]),
+          place("룸이스케이프 G", "방탈출 · 2~6명", ["단체석", "늦은 시간"])
+        ],
+        lodging: lodgingPlaces
       },
       hongdae: {
         restaurant: [
-          ["연남 식탁", "홍대입구역 도보 7분 · 가정식"],
-          ["소소한 밤", "상수역 도보 5분 · 퓨전 주점"],
-          ["키친 연트럴", "연남동 · 이탈리안"]
+          place("홍대 바삭치킨", "홍대입구역 도보 4분 · 치킨", ["단체석", "늦은 시간"], "chicken"),
+          place("스시 연남", "연남동 · 일식", ["조용한 분위기"], "japanese"),
+          place("연남 식탁", "홍대입구역 도보 7분 · 가정식", ["조용한 분위기", "반려동물 동반"], "korean"),
+          place("소소한 밤", "상수역 도보 5분 · 퓨전 주점", ["단체석", "늦은 시간"], "korean"),
+          place("키친 연트럴", "연남동 · 이탈리안", ["주차 가능", "조용한 분위기"], "western")
         ],
         cafe: [
-          ["레이어드 홍대", "홍대입구역 도보 5분 · 디저트"],
-          ["커피 스탠드 온", "연남동 · 로스터리"],
-          ["포레스트 테이블", "상수역 도보 6분 · 테라스"]
+          place("레이어드 홍대", "홍대입구역 도보 5분 · 디저트", ["단체석"]),
+          place("커피 스탠드 온", "연남동 · 로스터리", ["조용한 분위기"]),
+          place("포레스트 테이블", "상수역 도보 6분 · 테라스", ["반려동물 동반", "늦은 시간"])
         ],
         meeting: [
-          ["스페이스 홍", "홍대입구역 도보 3분 · 최대 12명"],
-          ["모임집 연남", "연남동 · 최대 8명"],
-          ["워크박스 상수", "상수역 도보 2분 · 최대 20명"]
+          place("스페이스 홍", "홍대입구역 도보 3분 · 최대 12명", ["단체석", "늦은 시간"]),
+          place("모임집 연남", "연남동 · 최대 8명", ["조용한 분위기", "반려동물 동반"]),
+          place("워크박스 상수", "상수역 도보 2분 · 최대 20명", ["주차 가능", "단체석"])
         ],
         activity: [
-          ["드로잉룸 연남", "원데이 드로잉 · 약 120분"],
-          ["사운드 스튜디오 H", "셀프 녹음 체험 · 약 60분"],
-          ["보드게임 아지트", "보드게임 · 2~10명"]
-        ]
+          place("드로잉룸 연남", "원데이 드로잉 · 약 120분", ["조용한 분위기", "반려동물 동반"]),
+          place("사운드 스튜디오 H", "셀프 녹음 체험 · 약 60분", ["조용한 분위기", "주차 가능"]),
+          place("보드게임 아지트", "보드게임 · 2~10명", ["단체석", "늦은 시간"])
+        ],
+        lodging: lodgingPlaces
       },
       seongsu: {
         restaurant: [
-          ["성수 다이닝", "성수역 도보 5분 · 컨템포러리"],
-          ["서울숲 키친", "서울숲역 도보 4분 · 브런치"],
-          ["골목식당 누리", "뚝섬역 도보 6분 · 한식"]
+          place("성수 치킨랩", "성수역 도보 3분 · 치킨", ["단체석", "늦은 시간"], "chicken"),
+          place("스시 포레스트", "서울숲역 도보 4분 · 일식", ["조용한 분위기", "주차 가능"], "japanese"),
+          place("성수 다이닝", "성수역 도보 5분 · 컨템포러리", ["조용한 분위기", "주차 가능"], "western"),
+          place("서울숲 키친", "서울숲역 도보 4분 · 브런치", ["반려동물 동반", "단체석"], "western"),
+          place("골목식당 누리", "뚝섬역 도보 6분 · 한식", ["단체석", "늦은 시간"], "korean")
         ],
         cafe: [
-          ["어니언 가든", "성수역 도보 6분 · 베이커리"],
-          ["포인트 커피 서울숲", "서울숲역 도보 3분 · 로스터리"],
-          ["스튜디오 빈", "뚝섬역 도보 5분 · 갤러리 카페"]
+          place("어니언 가든", "성수역 도보 6분 · 베이커리", ["반려동물 동반", "단체석"]),
+          place("포인트 커피 서울숲", "서울숲역 도보 3분 · 로스터리", ["조용한 분위기"]),
+          place("스튜디오 빈", "뚝섬역 도보 5분 · 갤러리 카페", ["주차 가능", "늦은 시간"])
         ],
         meeting: [
-          ["서울숲 워크룸", "서울숲역 도보 2분 · 최대 8명"],
-          ["성수 프로젝트룸", "성수역 도보 4분 · 최대 14명"],
-          ["커넥트 라운지", "뚝섬역 도보 3분 · 최대 20명"]
+          place("서울숲 워크룸", "서울숲역 도보 2분 · 최대 8명", ["조용한 분위기", "반려동물 동반"]),
+          place("성수 프로젝트룸", "성수역 도보 4분 · 최대 14명", ["조용한 분위기", "단체석"]),
+          place("커넥트 라운지", "뚝섬역 도보 3분 · 최대 20명", ["주차 가능", "단체석", "늦은 시간"])
         ],
         activity: [
-          ["향기 공방 성수", "향수 만들기 · 약 90분"],
-          ["프린트랩 서울숲", "실크스크린 체험 · 약 120분"],
-          ["클라이밍 베이스", "실내 클라이밍 · 초보 가능"]
-        ]
+          place("향기 공방 성수", "향수 만들기 · 약 90분", ["조용한 분위기"]),
+          place("프린트랩 서울숲", "실크스크린 체험 · 약 120분", ["주차 가능", "반려동물 동반"]),
+          place("클라이밍 베이스", "실내 클라이밍 · 초보 가능", ["주차 가능", "단체석", "늦은 시간"])
+        ],
+        lodging: lodgingPlaces
       },
       jamsil: {
         restaurant: [
-          ["호수 식탁", "석촌호수 도보 2분 · 퓨전 한식"],
-          ["테이블 잠실", "잠실역 도보 4분 · 이탈리안"],
-          ["송리단 키친", "송리단길 · 브런치"]
+          place("잠실 치킨클럽", "잠실역 도보 3분 · 치킨", ["단체석", "늦은 시간"], "chicken"),
+          place("스시 레이크", "석촌호수 도보 4분 · 일식", ["조용한 분위기", "주차 가능"], "japanese"),
+          place("호수 식탁", "석촌호수 도보 2분 · 퓨전 한식", ["조용한 분위기", "단체석"], "korean"),
+          place("테이블 잠실", "잠실역 도보 4분 · 이탈리안", ["주차 가능", "단체석"], "western"),
+          place("송리단 키친", "송리단길 · 브런치", ["반려동물 동반", "늦은 시간"], "western")
         ],
         cafe: [
-          ["레이크뷰 커피", "석촌호수 전망 · 디저트"],
-          ["카페 송리단", "송리단길 · 핸드드립"],
-          ["브릭 라운지", "잠실역 도보 5분 · 넓은 좌석"]
+          place("레이크뷰 커피", "석촌호수 전망 · 디저트", ["조용한 분위기", "단체석"]),
+          place("카페 송리단", "송리단길 · 핸드드립", ["조용한 분위기", "반려동물 동반"]),
+          place("브릭 라운지", "잠실역 도보 5분 · 넓은 좌석", ["주차 가능", "늦은 시간"])
         ],
         meeting: [
-          ["워크온 잠실", "잠실역 도보 3분 · 최대 10명"],
-          ["레이크 미팅룸", "석촌역 도보 4분 · 최대 8명"],
-          ["스페이스 J", "송파나루역 도보 2분 · 최대 18명"]
+          place("워크온 잠실", "잠실역 도보 3분 · 최대 10명", ["조용한 분위기", "단체석"]),
+          place("레이크 미팅룸", "석촌역 도보 4분 · 최대 8명", ["조용한 분위기", "주차 가능"]),
+          place("스페이스 J", "송파나루역 도보 2분 · 최대 18명", ["주차 가능", "단체석", "늦은 시간"])
         ],
         activity: [
-          ["베이킹룸 잠실", "베이킹 클래스 · 약 120분"],
-          ["스포츠존 J", "실내 스포츠 · 2~8명"],
-          ["가죽공방 호수", "가죽 소품 만들기 · 약 150분"]
+          place("베이킹룸 잠실", "베이킹 클래스 · 약 120분", ["조용한 분위기", "주차 가능"]),
+          place("스포츠존 J", "실내 스포츠 · 2~8명", ["단체석", "늦은 시간"]),
+          place("가죽공방 호수", "가죽 소품 만들기 · 약 150분", ["조용한 분위기", "반려동물 동반"])
+        ],
+        lodging: lodgingPlaces
+      },
+      jongno: {
+        restaurant: [
+          place("종로 치킨마당", "종각역 도보 4분 · 치킨", ["단체석", "늦은 시간"], "chicken"),
+          place("스시 고궁", "안국역 도보 3분 · 일식", ["조용한 분위기", "주차 가능"], "japanese"),
+          place("한옥 밥상", "경복궁역 도보 5분 · 한식", ["조용한 분위기", "단체석"], "korean"),
+          place("비스트로 종로", "종각역 도보 6분 · 양식", ["주차 가능", "늦은 시간"], "western")
+        ],
+        lodging: lodgingPlaces,
+        tourism: [
+          place("청와대", "청와대로 · 역사 문화 공간", ["조용한 분위기", "주차 가능"]),
+          place("경복궁", "사직로 · 조선 왕조의 법궁", ["단체석"]),
+          place("창덕궁", "율곡로 · 유네스코 세계유산", ["조용한 분위기"])
         ]
       }
     };
 
     const placeType = document.querySelector("#place-type");
     const region = document.querySelector("#region");
+    const cuisineField = document.querySelector("#cuisine-field");
+    const cuisineType = document.querySelector("#cuisine-type");
+    const gymCondition = document.querySelector("#gym-condition");
+    const gymCheckbox = gymCondition.querySelector("input");
     const placeList = document.querySelector("#place-list");
     const placeForm = document.querySelector("#place-form");
     const taxiForm = document.querySelector("#taxi-form");
     const destination = document.querySelector("#destination");
     const departure = document.querySelector("#departure");
     const departureTime = document.querySelector("#departure-time");
+    const placeError = document.querySelector("#place-error");
+    const taxiError = document.querySelector("#taxi-error");
+    const completeStep = document.querySelector("#complete-step");
+    const step2PlaceName = document.querySelector("#step2-place-name");
+    const step2PlaceMeta = document.querySelector("#step2-place-meta");
+    const taxiSubmitButton = document.querySelector("#taxi-submit-button");
     const cards = {
       1: document.querySelector("#place-step"),
       2: document.querySelector("#taxi-step"),
@@ -843,24 +1611,73 @@
     };
 
     let selectedPlaceName = "";
+    let isEditingReview = false;
+    let approvedSubmission = null;
+
+    function getSelectedConditions() {
+      return [...document.querySelectorAll('input[name="condition"]:checked')]
+        .map((input) => input.value);
+    }
+
+    function updateSelectedPlaceSummary() {
+      const typeLabel = placeType.options[placeType.selectedIndex]?.text || "";
+      const regionLabel = region.options[region.selectedIndex]?.text || "";
+      step2PlaceName.textContent = selectedPlaceName || "장소를 선택해 주세요";
+      step2PlaceMeta.textContent = selectedPlaceName ? `${regionLabel} · ${typeLabel}` : "STEP 1에서 장소를 선택해 주세요.";
+    }
+
+    function updateTaxiSubmitButton() {
+      taxiSubmitButton.textContent = isEditingReview ? "수정 완료하고 최종 확인" : "접수 내용 확인";
+    }
+
+    function updateCategoryControls() {
+      cuisineField.hidden = placeType.value !== "restaurant";
+      gymCondition.hidden = placeType.value !== "lodging";
+
+      if (placeType.value !== "lodging") {
+        gymCheckbox.checked = false;
+      }
+    }
+
+    function getFilteredPlaces() {
+      const selectedConditions = getSelectedConditions();
+      const selectedCuisine = cuisineType.value;
+      const places = placeCatalog[region.value]?.[placeType.value] || [];
+
+      return places.filter((item) => {
+        const matchesConditions = selectedConditions.every((condition) =>
+          item.conditions.includes(condition)
+        );
+        const matchesCuisine = placeType.value !== "restaurant" || !selectedCuisine || item.cuisine === selectedCuisine;
+        return matchesConditions && matchesCuisine;
+      });
+    }
+
+    function clearSelectedPlace() {
+      selectedPlaceName = "";
+      destination.value = "";
+      updateSelectedPlaceSummary();
+    }
 
     function renderPlaces() {
-      const previousSelection = selectedPlaceName;
-      const places = placeCatalog[region.value]?.[placeType.value] || [];
+      const places = getFilteredPlaces();
+      const selectionStillExists = places.some((item) => item.name === selectedPlaceName);
       placeList.innerHTML = "";
 
+      if (!selectionStillExists) {
+        clearSelectedPlace();
+      }
+
       if (!places.length) {
-        placeList.innerHTML = '<div class="empty-state">조건에 맞는 장소가 없습니다.</div>';
-        selectedPlaceName = "";
-        destination.value = "";
+        placeList.innerHTML = '<div class="empty-state">선택한 유형, 지역, 조건에 맞는 장소가 없습니다.</div>';
         return;
       }
 
-      places.forEach(([name, meta], index) => {
+      places.forEach(({ name, meta }) => {
         const option = document.createElement("label");
         option.className = "place-option";
         option.innerHTML = `
-          <input type="radio" name="place" value="${name}" ${name === previousSelection ? "checked" : ""}>
+          <input type="radio" name="place" value="${name}" ${name === selectedPlaceName ? "checked" : ""}>
           <span class="place-content">
             <span class="place-name">${name}</span>
             <span class="place-meta">${meta}</span>
@@ -869,14 +1686,10 @@
         option.querySelector("input").addEventListener("change", (event) => {
           selectedPlaceName = event.target.value;
           destination.value = selectedPlaceName;
-          document.querySelector("#place-error").classList.remove("show");
+          updateSelectedPlaceSummary();
+          placeError.classList.remove("show");
         });
         placeList.appendChild(option);
-
-        if (index === 0 && !places.some(([placeName]) => placeName === previousSelection)) {
-          selectedPlaceName = "";
-          destination.value = "";
-        }
       });
     }
 
@@ -889,6 +1702,9 @@
     }
 
     function goToStep(step) {
+      completeStep.classList.remove("active");
+      completeStep.hidden = true;
+
       Object.entries(cards).forEach(([number, card]) => {
         const isActive = Number(number) === step;
         card.classList.toggle("active", isActive);
@@ -903,9 +1719,33 @@
         else item.removeAttribute("aria-current");
       });
 
-      if (step === 2) setDefaultDepartureTime();
+      if (step === 2) {
+        setDefaultDepartureTime();
+        updateSelectedPlaceSummary();
+        updateTaxiSubmitButton();
+      }
       cards[step].scrollIntoView({ behavior: "smooth", block: "start" });
       const heading = cards[step].querySelector("h2");
+      heading.setAttribute("tabindex", "-1");
+      window.setTimeout(() => heading.focus({ preventScroll: true }), 220);
+    }
+
+    function showCompletion() {
+      Object.values(cards).forEach((card) => {
+        card.classList.remove("active");
+        card.hidden = true;
+      });
+
+      completeStep.hidden = false;
+      completeStep.classList.add("active");
+      document.querySelectorAll("[data-progress]").forEach((item) => {
+        item.classList.remove("active");
+        item.classList.add("done");
+        item.removeAttribute("aria-current");
+      });
+
+      completeStep.scrollIntoView({ behavior: "smooth", block: "start" });
+      const heading = document.querySelector("#complete-title");
       heading.setAttribute("tabindex", "-1");
       window.setTimeout(() => heading.focus({ preventScroll: true }), 220);
     }
@@ -923,59 +1763,149 @@
       }).format(date);
     }
 
-    function updateSummary() {
+    function buildSubmissionPayload() {
       const typeLabel = placeType.options[placeType.selectedIndex].text;
       const regionLabel = region.options[region.selectedIndex].text;
-      const conditions = [...document.querySelectorAll('input[name="condition"]:checked')]
-        .map((input) => input.value);
+      const cuisineLabel = cuisineType.options[cuisineType.selectedIndex].text;
+      const conditions = getSelectedConditions();
       const taxiType = document.querySelector('input[name="taxi-type"]:checked').value;
 
-      document.querySelector("#summary-place-name").textContent = selectedPlaceName;
-      document.querySelector("#summary-place-type").textContent = typeLabel;
-      document.querySelector("#summary-region").textContent = regionLabel;
-      document.querySelector("#summary-conditions").textContent = conditions.length ? conditions.join(", ") : "선택 안 함";
-      document.querySelector("#summary-departure").textContent = departure.value.trim();
-      document.querySelector("#summary-destination").textContent = selectedPlaceName;
-      document.querySelector("#summary-time").textContent = formatDepartureTime(departureTime.value);
-      document.querySelector("#summary-taxi-type").textContent = taxiType;
+      return {
+        place: {
+          name: selectedPlaceName,
+          type: typeLabel,
+          typeValue: placeType.value,
+          region: regionLabel,
+          regionValue: region.value,
+          cuisine: cuisineType.value ? cuisineLabel : "전체 음식",
+          cuisineValue: cuisineType.value,
+          conditions
+        },
+        taxi: {
+          departure: departure.value.trim(),
+          destination: selectedPlaceName,
+          departureTime: departureTime.value,
+          taxiType
+        }
+      };
     }
 
-    placeType.addEventListener("change", renderPlaces);
+    function updateSummary() {
+      const submission = buildSubmissionPayload();
+      const summaryCuisineRow = document.querySelector("#summary-cuisine-row");
+
+      document.querySelector("#summary-place-name").textContent = submission.place.name;
+      document.querySelector("#summary-place-type").textContent = submission.place.type;
+      document.querySelector("#summary-region").textContent = submission.place.region;
+      summaryCuisineRow.hidden = submission.place.typeValue !== "restaurant";
+      document.querySelector("#summary-cuisine").textContent = submission.place.cuisine;
+      document.querySelector("#summary-conditions").textContent = submission.place.conditions.length ? submission.place.conditions.join(", ") : "선택 안 함";
+      document.querySelector("#summary-departure").textContent = submission.taxi.departure;
+      document.querySelector("#summary-destination").textContent = submission.taxi.destination;
+      document.querySelector("#summary-time").textContent = formatDepartureTime(submission.taxi.departureTime);
+      document.querySelector("#summary-taxi-type").textContent = submission.taxi.taxiType;
+    }
+
+    function renderApprovedSubmission(submission) {
+      const finalCuisineRow = document.querySelector("#final-cuisine-row");
+
+      document.querySelector("#final-place-name").textContent = submission.place.name;
+      document.querySelector("#final-place-type").textContent = submission.place.type;
+      document.querySelector("#final-region").textContent = submission.place.region;
+      finalCuisineRow.hidden = submission.place.typeValue !== "restaurant";
+      document.querySelector("#final-cuisine").textContent = submission.place.cuisine;
+      document.querySelector("#final-conditions").textContent = submission.place.conditions.length ? submission.place.conditions.join(", ") : "선택 안 함";
+      document.querySelector("#final-departure").textContent = submission.taxi.departure;
+      document.querySelector("#final-destination").textContent = submission.taxi.destination;
+      document.querySelector("#final-time").textContent = formatDepartureTime(submission.taxi.departureTime);
+      document.querySelector("#final-taxi-type").textContent = submission.taxi.taxiType;
+    }
+
+    function beginReviewEdit(step) {
+      isEditingReview = true;
+      updateTaxiSubmitButton();
+      goToStep(step);
+    }
+
+    function approveSubmission() {
+      approvedSubmission = buildSubmissionPayload();
+
+      // Supabase 연결 시 이 지점에서 approvedSubmission을 한 번만 저장한다.
+      renderApprovedSubmission(approvedSubmission);
+      showCompletion();
+    }
+
+    function resetAll() {
+      placeForm.reset();
+      taxiForm.reset();
+      isEditingReview = false;
+      approvedSubmission = null;
+      clearSelectedPlace();
+      departure.value = "";
+      departureTime.value = "";
+      placeError.classList.remove("show");
+      taxiError.classList.remove("show");
+      updateCategoryControls();
+      updateTaxiSubmitButton();
+      renderPlaces();
+      goToStep(1);
+    }
+
+    placeType.addEventListener("change", () => {
+      updateCategoryControls();
+      renderPlaces();
+    });
     region.addEventListener("change", renderPlaces);
+    cuisineType.addEventListener("change", renderPlaces);
+    document.querySelectorAll('input[name="condition"]').forEach((input) => {
+      input.addEventListener("change", renderPlaces);
+    });
 
     placeForm.addEventListener("submit", (event) => {
       event.preventDefault();
       if (!selectedPlaceName) {
-        document.querySelector("#place-error").classList.add("show");
+        placeError.classList.add("show");
         placeList.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
       destination.value = selectedPlaceName;
+      updateSelectedPlaceSummary();
       goToStep(2);
     });
 
     taxiForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      const error = document.querySelector("#taxi-error");
       if (!departure.value.trim() || !departureTime.value) {
-        error.classList.add("show");
+        taxiError.classList.add("show");
         if (!departure.value.trim()) departure.focus();
         else departureTime.focus();
         return;
       }
-      error.classList.remove("show");
+      taxiError.classList.remove("show");
       updateSummary();
+      isEditingReview = false;
+      updateTaxiSubmitButton();
       goToStep(3);
     });
 
     departure.addEventListener("input", () => {
-      if (departure.value.trim()) document.querySelector("#taxi-error").classList.remove("show");
+      if (departure.value.trim()) taxiError.classList.remove("show");
     });
 
     document.querySelectorAll("[data-go-step]").forEach((button) => {
       button.addEventListener("click", () => goToStep(Number(button.dataset.goStep)));
     });
+    document.querySelector("#step2-place-edit").addEventListener("click", () => goToStep(1));
+    document.querySelector("#review-place-edit").addEventListener("click", () => beginReviewEdit(1));
+    document.querySelector("#review-taxi-edit").addEventListener("click", () => beginReviewEdit(2));
+    document.querySelector("#review-all-edit").addEventListener("click", () => beginReviewEdit(1));
+    document.querySelector("#final-approve").addEventListener("click", approveSubmission);
+    document.querySelector("#reset-all").addEventListener("click", resetAll);
+    document.querySelector("#reset-after-approval").addEventListener("click", resetAll);
 
+    updateCategoryControls();
+    updateSelectedPlaceSummary();
+    updateTaxiSubmitButton();
     renderPlaces();
   </script>
 </body>
